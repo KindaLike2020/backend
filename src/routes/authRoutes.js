@@ -56,17 +56,16 @@ router.post('/password_reset_send_email', async (req, res) => {
   const user = await User.findOne({ email: email });
   console.log('user: ', user)
   if (user === null){
-    //console.log('cannot find this email address')
     return res.status(422).send({ error: 'Cannot find an account associated with the email address' });
   } else {
-    //console.log('found the account')
-    //const token = crypto.randomBytes(20).toString('hex')
+
     const token = Math.floor(Math.random()*1000000)+1
-    //console.log('token is ', token)
+    console.log('token is ', token)
     await user.updateOne({
       resetToken:token,
       resetTokenExpires: Date.now()+360000,
     })
+    console.log('done updating token - start sending email')
     
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -80,16 +79,18 @@ router.post('/password_reset_send_email', async (req, res) => {
       from: 'KindaLike2020@gmail.com',
       to: email,
       subject: 'Link To Reset Password',
-      text:`You are receiving this email because..\n\n Here is the code:\n` + 
+      text:`You are receiving this email because you requested to reset the password.
+      \n\n Here is the code:\n` + 
       `${token}`     
     }
 
-    //console.log('sending the email')
+
     transporter.sendMail(mailOptions, (err, response)=>{
       if (err){
-        //console.log('there is an error: ', err);
+        console.log('error in email: ', err);
       } else {
         //console.log('there is a response: ', response);
+        console.log('sent email');
         res.status(200).json('recovery email sent')
       }
     })
