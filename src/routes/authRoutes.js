@@ -71,7 +71,6 @@ router.post('/password_reset_send_email', async (req, res) => {
       service: 'gmail',
       auth:{
         user:'KindaLike2020@gmail.com',
-        //pass:'KindaLikeApp20!'
         pass:process.env.gmailPwd
       }
     });
