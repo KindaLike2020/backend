@@ -26,7 +26,9 @@ app.use(pwdResetRoutes);
 app.use(historyRoutes);
 app.use(imageRoutes);
 
-const mongoUri = 'mongodb+srv://tatiana:tatiana0824@cluster0.cigjb.mongodb.net/UserInfo?retryWrites=true&w=majority';
+//const mongoUri = 'mongodb+srv://tatiana:tatiana0824@cluster0.cigjb.mongodb.net/UserInfo?retryWrites=true&w=majority';
+const mongoUri = process.env.mongoURL;
+
 if (!mongoUri) {
   throw new Error(
     `MongoURI was not supplied.  Make sure you watch the video on setting up Mongo DB!`
