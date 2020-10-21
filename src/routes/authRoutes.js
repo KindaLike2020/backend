@@ -70,12 +70,12 @@ router.post('/password_reset_send_email', async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth:{
-        //user:'KindaLike2020@gmail.com',
-        //pass:'KindaLikeApp20!'
+        user:'KindaLike2020@gmail.com',
+        pass:'KindaLikeApp20!'
         //pass:process.env.gmailPwd
-        type: 'OAuth2',
-        user: 'KindaLike2020@gmail.com',
-        accessToken: 'AIzaSyDxqZGbHCNTHV1vMbjYUTQLGpUlOxdRx7U'
+        //type: 'OAuth2',
+        //user: 'KindaLike2020@gmail.com',
+        //accessToken: 'AIzaSyDxqZGbHCNTHV1vMbjYUTQLGpUlOxdRx7U'
       }
     });
 
