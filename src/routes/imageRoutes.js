@@ -32,7 +32,7 @@ router.get('/image_download', async (req, res) => {
     //console.log('entered /image _download server')
     //connect to Amazon S3 storage
     try{
-        var s3 = new AWS.S3({accessKeyId:'AKIAXBZG3GVACEKM3EFY', secretAccessKey:'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', region:'us-east-1'});
+        var s3 = new AWS.S3({accessKeyId:process.env.S3_accessKeyId, secretAccessKey:process.env.secretAccessKey, region:'us-east-1'});
         var params = {Bucket: 'kindalike', Key: `profile_images/${req.user._id}.jpg`};
         s3.getSignedUrl('getObject', params, function (err, url) {
             //console.log('Your generated download pre-signed URL is', url);
