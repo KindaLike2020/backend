@@ -17,7 +17,6 @@ router.post('/signup', async (req, res) => {
   const location = address.city + ', ' + address.state
   console.log('location is ', location)
 
-
   try {
     const user = new User({ email, password, username, location, zip_code, age, kids, relationship, veg, religion });
     await user.save();
@@ -25,6 +24,8 @@ router.post('/signup', async (req, res) => {
     const token = jwt.sign({ userId: user._id }, 'MY_SECRET_KEY');
     res.send({ token });
   } catch (err) {
+    console.log('err.message: ')
+    console.log(err.message)
     return res.status(422).send(err.message);
   }
 });
